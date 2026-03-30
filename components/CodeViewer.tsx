@@ -7,6 +7,40 @@ interface CodeViewerProps {
   activeTemplate: TemplateId;
 }
 
+function highlightSyntax(code: string): React.ReactNode[] {
+  const lines = code.split("\n");
+  return lines.map((line, i) => (
+    <div key={i} className="flex">
+      <span className="code-line-number text-[13px] leading-6 shrink-0">
+        {i + 1}
+      </span>
+      <span
+        className="text-[13px] leading-6 whitespace-pre"
+        dangerouslySetInnerHTML={{ __html: colorize(line) }}
+      />
+    </div>
+  ));
+}
+
+function colorize(line: string): string {
+  return line
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(
+      /\b(import|from|export|default|function|return|interface|const)\b/g,
+      '<span class="token-keyword">$1</span>'
+    )
+    .replace(
+      /(&quot;|")(.*?)(\1)/g,
+      '<span class="token-string">"$2"</span>'
+    )
+    .replace(
+      /(\w+)(?=\s*[:=]\s*\{)/g,
+      '<span class="token-prop">$1</span>'
+    );
+}
+
 export default function CodeViewer({ activeTemplate }: CodeViewerProps) {
   const [copied, setCopied] = useState(false);
   const template = templates.find((t) => t.id === activeTemplate)!;
@@ -18,21 +52,43 @@ export default function CodeViewer({ activeTemplate }: CodeViewerProps) {
   };
 
   return (
-    <div className="rounded-xl border border-border overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-3 bg-surface border-b border-border">
-        <span className="font-mono text-sm text-muted">
-          {template.filename}
-        </span>
+    <div className="rounded-xl border border-border overflow-hidden bg-code-bg">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-surface border-b border-border">
+        <div className="flex items-center gap-2">
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-border" />
+            <div className="w-2.5 h-2.5 rounded-full bg-border" />
+            <div className="w-2.5 h-2.5 rounded-full bg-border" />
+          </div>
+          <span className="font-mono text-[12px] text-muted ml-2">
+            {template.filename}
+          </span>
+        </div>
         <button
           onClick={handleCopy}
-          className="text-xs font-mono px-3 py-1 rounded-md border border-border text-muted hover:text-text hover:border-muted transition-colors duration-150"
+          className="text-[12px] font-mono px-2.5 py-1 rounded-md border border-border text-muted hover:text-text hover:border-border-hover transition-all duration-150 cursor-pointer"
         >
-          {copied ? "Copiado" : "Copiar"}
+          {copied ? (
+            <span className="flex items-center gap-1.5 text-success">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Copiado
+            </span>
+          ) : (
+            <span className="flex items-center gap-1.5">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              Copiar
+            </span>
+          )}
         </button>
       </div>
-      <div className="bg-code-bg p-4 overflow-x-auto">
-        <pre className="font-mono text-sm leading-relaxed text-text">
-          <code>{template.source}</code>
+      <div className="p-4 overflow-x-auto">
+        <pre className="font-mono">
+          <code>{highlightSyntax(template.source)}</code>
         </pre>
       </div>
     </div>

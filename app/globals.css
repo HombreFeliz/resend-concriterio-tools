@@ -2,30 +2,100 @@
 
 @theme {
   --color-primary: #7665FF;
-  --color-background: #0a0a0a;
-  --color-surface: #111111;
-  --color-border: #1e1e1e;
-  --color-text: #e2e2e2;
+  --color-primary-light: #8b7dff;
+  --color-background: #050505;
+  --color-surface: #0a0a0a;
+  --color-surface-elevated: #111111;
+  --color-border: #1a1a1a;
+  --color-border-hover: #2a2a2a;
+  --color-text: #ededed;
+  --color-text-secondary: #a1a1a1;
   --color-muted: #666666;
   --color-success: #4ade80;
   --color-error: #f87171;
-  --color-code-bg: #0d0d0d;
+  --color-code-bg: #080808;
+  --color-code-line: #111111;
 
   --font-display: "Fraunces", serif;
   --font-body: "Outfit", sans-serif;
   --font-mono: "Space Mono", monospace;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3 {
   font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 code, pre, .font-mono {
   font-family: var(--font-mono);
+}
+
+/* Resend-style subtle glow behind hero */
+.hero-glow {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse at center, rgba(118, 101, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Code block line numbers */
+.code-line-number {
+  color: #333;
+  user-select: none;
+  min-width: 2ch;
+  text-align: right;
+  padding-right: 1em;
+}
+
+/* Syntax highlighting - Resend-inspired muted colors */
+.token-keyword { color: #c4b5fd; }
+.token-string { color: #86efac; }
+.token-component { color: #7dd3fc; }
+.token-prop { color: #fbbf24; }
+.token-comment { color: #444; }
+.token-bracket { color: #666; }
+.token-tag { color: #f0abfc; }
+
+/* Smooth transitions */
+.transition-theme {
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(118, 101, 255, 0.3);
+  color: #fff;
 }

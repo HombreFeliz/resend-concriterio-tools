@@ -11,24 +11,27 @@ export default function ApiResponse({ data }: ApiResponseProps) {
   const json = JSON.stringify(data, null, 2);
 
   return (
-    <div
-      className={`rounded-xl border overflow-hidden transition-all duration-150 ${
-        isError ? "border-error/30" : "border-success/30"
-      }`}
-    >
+    <div className="mt-4 animate-in">
       <div
-        className={`px-4 py-2 text-xs font-mono ${
-          isError
-            ? "bg-error/10 text-error"
-            : "bg-success/10 text-success"
+        className={`rounded-xl border overflow-hidden ${
+          isError ? "border-error/20" : "border-success/20"
         }`}
       >
-        {isError ? "Error" : "Respuesta de Resend"}
-      </div>
-      <div className="bg-code-bg p-4">
-        <pre className="font-mono text-sm leading-relaxed text-text overflow-x-auto">
-          {json}
-        </pre>
+        <div
+          className={`flex items-center gap-2 px-4 py-2 text-[12px] font-mono border-b ${
+            isError
+              ? "bg-error/[0.05] text-error border-error/20"
+              : "bg-success/[0.05] text-success border-success/20"
+          }`}
+        >
+          <div className={`w-1.5 h-1.5 rounded-full ${isError ? "bg-error" : "bg-success"}`} />
+          {isError ? "Error" : "Email enviado"}
+        </div>
+        <div className="bg-code-bg p-4">
+          <pre className="font-mono text-[13px] leading-6 text-text-secondary overflow-x-auto">
+            {json}
+          </pre>
+        </div>
       </div>
     </div>
   );
