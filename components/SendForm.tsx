@@ -35,29 +35,43 @@ export default function SendForm({ activeTemplate, onResponse }: SendFormProps) 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-3">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="tu@email.com"
-        className="flex-1 px-4 py-3 rounded-lg bg-surface border border-border text-text placeholder:text-muted font-body text-sm focus:outline-none focus:border-primary transition-colors duration-150"
-      />
+    <form onSubmit={handleSubmit} className="flex gap-2.5">
+      <div className="relative flex-1">
+        <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted pointer-events-none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+        </div>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="tu@email.com"
+          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface border border-border text-text text-sm placeholder:text-muted font-body focus:outline-none focus:border-glass-border focus:ring-1 focus:ring-primary/15 transition-all duration-150"
+        />
+      </div>
       <button
         type="submit"
         disabled={!isValid || loading}
-        className="px-6 py-3 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-150"
+        className="px-5 py-2.5 rounded-xl bg-text text-background font-semibold text-sm hover:bg-white disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-150 cursor-pointer whitespace-nowrap"
       >
         {loading ? (
           <span className="inline-flex items-center gap-2">
-            <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+            <svg className="animate-spin h-3.5 w-3.5" viewBox="0 0 24 24" fill="none">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
             </svg>
-            Enviando
+            Enviando...
           </span>
         ) : (
-          "Enviar"
+          <span className="inline-flex items-center gap-2">
+            Enviar email
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </span>
         )}
       </button>
     </form>
