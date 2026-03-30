@@ -39,28 +39,36 @@ export default function Home() {
       {/* Hero section with glow */}
       <div className="relative overflow-hidden">
         <div className="hero-glow" />
-        <div className="max-w-2xl mx-auto px-5 pt-20 pb-16 relative z-10">
-          <header className="mb-20">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span className="font-mono text-[13px] text-text-secondary tracking-wide">
-                resend.concriterio.tools
-              </span>
-            </div>
-            <h1 className="text-[40px] sm:text-[48px] font-bold tracking-tight leading-[1.1] mb-5">
-              Envía emails{" "}
-              <span className="text-primary">transaccionales</span>
+
+        <div className="max-w-2xl mx-auto px-5 pt-24 pb-16 relative z-10">
+          {/* Nav hint */}
+          <nav className="flex items-center gap-2 mb-16">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="font-mono text-[13px] text-text-secondary tracking-wide">
+              resend.concriterio.tools
+            </span>
+          </nav>
+
+          {/* Hero */}
+          <header className="mb-24">
+            <h1 className="gradient-text text-[42px] sm:text-[52px] font-bold tracking-tight leading-[1.08] mb-6">
+              Envía emails
+              <br />
+              transaccionales
               <br />
               con Resend
             </h1>
-            <p className="text-text-secondary text-[17px] leading-relaxed max-w-lg">
+            <p className="text-text-secondary text-[17px] leading-relaxed max-w-md">
               Elige una plantilla, introduce tu email y recibe el mensaje en tu
               bandeja. React Email + Next.js + Resend SDK.
             </p>
           </header>
 
+          {/* Accent line */}
+          <div className="accent-line mb-16" />
+
           {/* Template Picker */}
-          <section className="mb-12">
+          <section className="mb-14">
             <SectionLabel>01 — Plantilla</SectionLabel>
             <TemplatePicker
               activeTemplate={activeTemplate}
@@ -72,7 +80,7 @@ export default function Home() {
           </section>
 
           {/* Code Viewer */}
-          <section className="mb-12">
+          <section className="mb-14">
             <SectionLabel>02 — Código del componente</SectionLabel>
             <CodeViewer activeTemplate={activeTemplate} />
           </section>
@@ -84,12 +92,12 @@ export default function Home() {
           </section>
 
           {/* API Response */}
-          <section className="mb-20">
+          <section className="mb-24">
             <ApiResponse data={response} />
           </section>
 
-          {/* Divider */}
-          <div className="border-t border-border mb-16" />
+          {/* Accent line */}
+          <div className="accent-line mb-16" />
 
           {/* Banners */}
           <div className="space-y-3 mb-16">
@@ -113,20 +121,20 @@ export default function Home() {
           </div>
 
           {/* Stack */}
-          <section className="mb-20">
+          <section className="mb-24">
             <SectionLabel>Stack técnico</SectionLabel>
             <div className="space-y-0">
               {stackItems.map((item, i) => (
                 <div
                   key={item.name}
-                  className={`flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 py-3.5 ${
+                  className={`flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 py-4 ${
                     i < stackItems.length - 1 ? "border-b border-border" : ""
                   }`}
                 >
-                  <span className="font-mono text-[13px] text-primary shrink-0 w-24">
+                  <span className="font-mono text-[13px] text-primary shrink-0 w-28">
                     {item.name}
                   </span>
-                  <span className="text-text-secondary text-[14px]">
+                  <span className="text-text-secondary text-[14px] leading-relaxed">
                     {item.reason}
                   </span>
                 </div>
@@ -135,7 +143,7 @@ export default function Home() {
           </section>
 
           {/* Footer */}
-          <footer className="border-t border-border pt-8 pb-16 flex items-center justify-between">
+          <footer className="border-t border-border pt-8 pb-20 flex items-center justify-between">
             <p className="text-muted text-[13px]">
               Hecho por{" "}
               <a
@@ -159,7 +167,7 @@ export default function Home() {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-[13px] font-mono text-muted uppercase tracking-wider mb-4">
+    <h2 className="text-[12px] font-mono text-muted uppercase tracking-widest mb-5">
       {children}
     </h2>
   );
@@ -179,13 +187,13 @@ function BannerCard({ title, description, href, cta, badge }: BannerCardProps) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block p-5 rounded-xl border border-border bg-surface hover:border-border-hover hover:bg-surface-elevated transition-all duration-150"
+      className="group block p-5 rounded-xl glass-button transition-all duration-150"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
           <p className="text-text text-[15px] mb-0.5">{title}</p>
           {description && (
-            <p className="text-muted text-[13px]">
+            <p className="text-text-secondary text-[13px]">
               {description}
               {badge && (
                 <span className="ml-2 inline-block px-2 py-0.5 rounded text-[11px] font-mono bg-primary/10 text-primary-light">
@@ -195,7 +203,7 @@ function BannerCard({ title, description, href, cta, badge }: BannerCardProps) {
             </p>
           )}
         </div>
-        <span className="text-muted text-[13px] group-hover:text-primary shrink-0 mt-0.5 transition-colors duration-150 flex items-center gap-1">
+        <span className="text-text-secondary text-[13px] group-hover:text-primary shrink-0 mt-0.5 transition-colors duration-150 flex items-center gap-1.5">
           {cta}
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-0.5 transition-transform duration-150">
             <line x1="5" y1="12" x2="19" y2="12" />

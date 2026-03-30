@@ -3,18 +3,20 @@
 @theme {
   --color-primary: #7665FF;
   --color-primary-light: #8b7dff;
-  --color-background: #050505;
+  --color-background: #000000;
   --color-surface: #0a0a0a;
   --color-surface-elevated: #111111;
-  --color-border: #1a1a1a;
-  --color-border-hover: #2a2a2a;
-  --color-text: #ededed;
-  --color-text-secondary: #a1a1a1;
-  --color-muted: #666666;
+  --color-border: #1e1e1e;
+  --color-border-hover: #34343A;
+  --color-text: #EDEDEF;
+  --color-text-secondary: #706F78;
+  --color-muted: #52525B;
   --color-success: #4ade80;
   --color-error: #f87171;
-  --color-code-bg: #080808;
+  --color-code-bg: #050505;
   --color-code-line: #111111;
+  --color-glass: rgba(255, 255, 255, 0.06);
+  --color-glass-border: #34343A;
 
   --font-display: "Fraunces", serif;
   --font-body: "Outfit", sans-serif;
@@ -45,40 +47,79 @@ code, pre, .font-mono {
 /* Resend-style subtle glow behind hero */
 .hero-glow {
   position: absolute;
-  top: -120px;
+  top: -160px;
   left: 50%;
   transform: translateX(-50%);
-  width: 600px;
-  height: 400px;
-  background: radial-gradient(ellipse at center, rgba(118, 101, 255, 0.08) 0%, transparent 70%);
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(118, 101, 255, 0.06) 0%,
+    rgba(118, 101, 255, 0.02) 40%,
+    transparent 70%
+  );
   pointer-events: none;
   z-index: 0;
 }
 
-/* Code block line numbers */
-.code-line-number {
-  color: #333;
-  user-select: none;
-  min-width: 2ch;
-  text-align: right;
-  padding-right: 1em;
+/* Gradient text - Resend uses white-to-accent */
+.gradient-text {
+  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 50%, #7665FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Syntax highlighting - Resend-inspired muted colors */
+/* Glassmorphism button */
+.glass-button {
+  background: linear-gradient(
+    145.37deg,
+    rgba(255, 255, 255, 0.09) -8.75%,
+    rgba(255, 255, 255, 0.027) 83.95%
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid #34343A;
+}
+.glass-button:hover {
+  background: linear-gradient(
+    145.37deg,
+    rgba(255, 255, 255, 0.12) -8.75%,
+    rgba(255, 255, 255, 0.04) 83.95%
+  );
+}
+
+/* Gradient accent line (Resend uses cyan-to-pink, we use violet) */
+.accent-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(118, 101, 255, 0.5) 30%,
+    rgba(118, 101, 255, 0.8) 50%,
+    rgba(118, 101, 255, 0.5) 70%,
+    transparent 100%
+  );
+}
+
+/* Code block line numbers */
+.code-line-number {
+  color: #34343A;
+  user-select: none;
+  min-width: 2.5ch;
+  text-align: right;
+  padding-right: 1.25em;
+}
+
+/* Syntax highlighting - Resend-inspired muted palette */
 .token-keyword { color: #c4b5fd; }
 .token-string { color: #86efac; }
 .token-component { color: #7dd3fc; }
 .token-prop { color: #fbbf24; }
-.token-comment { color: #444; }
-.token-bracket { color: #666; }
+.token-comment { color: #3f3f46; }
+.token-bracket { color: #52525b; }
 .token-tag { color: #f0abfc; }
 
-/* Smooth transitions */
-.transition-theme {
-  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
-}
-
-/* Scrollbar styling */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -87,15 +128,40 @@ code, pre, .font-mono {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #222;
+  background: #1e1e1e;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #333;
+  background: #34343A;
 }
 
-/* Selection */
+/* Selection - Resend uses cyan, we use violet */
 ::selection {
-  background-color: rgba(118, 101, 255, 0.3);
+  background-color: rgba(118, 101, 255, 0.25);
   color: #fff;
+}
+
+/* Slide-down animation for API response */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-slide-down {
+  animation: slideDown 200ms ease-out;
+}
+
+/* Shine animation for CTA button */
+@keyframes shine {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
 }

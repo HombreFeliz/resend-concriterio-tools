@@ -48,13 +48,13 @@ export default function SendForm({ activeTemplate, onResponse }: SendFormProps) 
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="tu@email.com"
-          className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-surface-elevated border border-border text-text text-sm placeholder:text-muted/60 font-body focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all duration-150"
+          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface border border-border text-text text-sm placeholder:text-muted font-body focus:outline-none focus:border-glass-border focus:ring-1 focus:ring-primary/15 transition-all duration-150"
         />
       </div>
       <button
         type="submit"
         disabled={!isValid || loading}
-        className="px-5 py-2.5 rounded-lg bg-text text-background font-semibold text-sm hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-150 cursor-pointer whitespace-nowrap"
+        className="px-5 py-2.5 rounded-xl bg-text text-background font-semibold text-sm hover:bg-white disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-150 cursor-pointer whitespace-nowrap"
       >
         {loading ? (
           <span className="inline-flex items-center gap-2">

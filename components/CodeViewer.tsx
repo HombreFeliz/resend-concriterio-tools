@@ -10,7 +10,7 @@ interface CodeViewerProps {
 function highlightSyntax(code: string): React.ReactNode[] {
   const lines = code.split("\n");
   return lines.map((line, i) => (
-    <div key={i} className="flex">
+    <div key={i} className="flex hover:bg-white/[0.02] -mx-4 px-4 rounded">
       <span className="code-line-number text-[13px] leading-6 shrink-0">
         {i + 1}
       </span>
@@ -52,21 +52,21 @@ export default function CodeViewer({ activeTemplate }: CodeViewerProps) {
   };
 
   return (
-    <div className="rounded-xl border border-border overflow-hidden bg-code-bg">
-      <div className="flex items-center justify-between px-4 py-2.5 bg-surface border-b border-border">
-        <div className="flex items-center gap-2">
+    <div className="rounded-xl border border-glass-border overflow-hidden bg-code-bg">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-border">
+        <div className="flex items-center gap-3">
           <div className="flex gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-border" />
-            <div className="w-2.5 h-2.5 rounded-full bg-border" />
-            <div className="w-2.5 h-2.5 rounded-full bg-border" />
+            <div className="w-2.5 h-2.5 rounded-full bg-white/[0.06] border border-white/[0.08]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-white/[0.06] border border-white/[0.08]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-white/[0.06] border border-white/[0.08]" />
           </div>
-          <span className="font-mono text-[12px] text-muted ml-2">
+          <span className="font-mono text-[12px] text-muted">
             {template.filename}
           </span>
         </div>
         <button
           onClick={handleCopy}
-          className="text-[12px] font-mono px-2.5 py-1 rounded-md border border-border text-muted hover:text-text hover:border-border-hover transition-all duration-150 cursor-pointer"
+          className="text-[12px] font-mono px-2.5 py-1 rounded-lg border border-border text-muted hover:text-text-secondary hover:border-glass-border transition-all duration-150 cursor-pointer"
         >
           {copied ? (
             <span className="flex items-center gap-1.5 text-success">
